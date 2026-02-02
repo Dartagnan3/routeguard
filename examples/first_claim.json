@@ -1,0 +1,9 @@
+{
+  "id": "claim-001",
+  "statement": "The Eiffel Tower is in Paris.",
+  "source": "wikipedia",
+  "timestamp": "2026-02-02T09:05:00Z",
+  "confidence": 0.95,
+  "uncertainty": 0.05,
+  "ttl": "permanent"
+}
