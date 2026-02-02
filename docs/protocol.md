@@ -90,6 +90,16 @@ Residual disagreement is mandatory. “No residuals” is suspicious unless grou
 
 ## 5. Gates (Verification Before Action)
 
+## Execution Gates
+
+Before any tool call or memory commit, RouteGuard emits a GateEvent.
+A GateEvent records whether an action is permitted based on:
+- context trust
+- required approvals
+- role separation
+
+No action executes without a GateEvent decision.
+
 A standard gate order:
 
 1. SOURCE_AND_FIELDS_PRESENT
