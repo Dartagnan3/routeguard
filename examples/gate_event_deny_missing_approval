@@ -1,0 +1,11 @@
+{
+  "gate_id": "gate-003",
+  "action_type": "tool_call",
+  "requested_action": "send_external_email",
+  "tainted_context": false,
+  "approvals_required": ["anchor", "auditor"],
+  "approvals_received": ["anchor"],
+  "decision": "deny",
+  "reason": "Execution denied: context verified as untainted, but required Auditor approval was not obtained.",
+  "timestamp": "2026-02-02T11:00:00Z"
+}
