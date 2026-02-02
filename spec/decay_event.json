@@ -1,0 +1,23 @@
+{
+  "type": "DecayEvent",
+  "required": [
+    "event_id",
+    "claim_id",
+    "previous_hash",
+    "new_hash",
+    "timestamp",
+    "reason",
+    "actor",
+    "ttl_hours"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "claim_id": { "type": "string" },
+    "previous_hash": { "type": "string" },
+    "new_hash": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "reason": { "type": "string" },
+    "actor": { "type": "string" },
+    "ttl_hours": { "type": "number", "minimum": 0 }
+  }
+}
