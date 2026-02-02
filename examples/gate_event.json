@@ -1,11 +1,11 @@
 {
   "gate_id": "gate-001",
   "action_type": "tool_call",
-  "requested_action": "send_email",
+  "requested_action": "send_external_email",
   "tainted_context": true,
   "approvals_required": ["anchor", "auditor"],
   "approvals_received": ["anchor"],
   "decision": "deny",
-  "reason": "Context flagged as tainted; Auditor approval missing.",
+  "reason": "Execution denied: context marked as tainted and required Auditor approval was not obtained.",
   "timestamp": "2026-02-02T10:30:00Z"
 }
