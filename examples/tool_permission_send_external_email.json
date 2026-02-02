@@ -1,0 +1,28 @@
+{
+  "policy_id": "tool-policy-001",
+  "version": "1.0",
+
+  "tool": "send_external_email",
+
+  "allowed": true,
+
+  "allowed_callers": ["anchor"],
+
+  "required_approvals": ["anchor", "auditor"],
+
+  "constraints": {
+    "max_calls_per_minute": 2,
+
+    "allow_external_io": true,
+    "allow_network": true,
+
+    "allow_filesystem_write": false,
+    "allow_memory_write": false,
+
+    "require_citations_for_claims": true
+  },
+
+  "notes": "External email allowed only with Anchor and Auditor approval.",
+
+  "timestamp": "2026-02-02T10:56:00Z"
+}
