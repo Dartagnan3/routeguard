@@ -1,6 +1,6 @@
 # RouteGuard Protocol (Field Manual)
 
-RouteGuard is a constraint layer for agent swarms. It enforces *route integrity* (non-drifting behavior)
+RouteGuard is a constraint layer for multi-agent systems. It enforces *route integrity* (non-drifting behavior)
 by requiring provenance, decay, falsification, residuals, and explicit uncertainty accounting before
 memory commits or tool execution.
 
