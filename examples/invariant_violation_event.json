@@ -1,0 +1,24 @@
+{
+  "event_id": "inv-001",
+  "event_type": "InvariantViolation",
+
+  "invariant": "no_external_io_without_approval",
+
+  "observed_action": "send_external_email",
+
+  "tool": "send_external_email",
+
+  "gate_decision": "deny",
+
+  "violations": [
+    "tool_permission_missing",
+    "auditor_approval_missing"
+  ],
+
+  "repair_plan": [
+    "request auditor approval",
+    "re-run gate_event"
+  ],
+
+  "timestamp": "2026-02-02T11:00:00Z"
+}
