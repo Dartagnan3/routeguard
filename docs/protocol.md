@@ -113,6 +113,12 @@ A standard gate order:
 7. TOOL_PERMISSION_GATE (v0.2)
 8. NO_FORBIDDEN_PRACTICES
 
+## Invariant violations (auditable failures)
+
+When a gate denies an action, RouteGuard can emit an `InvariantViolation` event that records **what invariant was broken**, **what was attempted**, and the **minimal repair plan**. This creates an auditable trail that is readable by humans and enforceable by systems.
+
+See: `examples/invariant_violation_event.json`
+
 If a gate FAILS, the system must produce:
 - violations
 - minimal repairs
