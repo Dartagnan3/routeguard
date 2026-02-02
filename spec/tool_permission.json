@@ -1,0 +1,63 @@
+{
+  "type": "ToolPermission",
+  "required": [
+    "policy_id",
+    "version",
+    "tool",
+    "allowed",
+    "allowed_callers",
+    "required_approvals",
+    "constraints",
+    "timestamp"
+  ],
+  "properties": {
+    "policy_id": { "type": "string" },
+    "version": { "type": "string" },
+
+    "tool": { "type": "string" },
+
+    "allowed": { "type": "boolean" },
+
+    "allowed_callers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0
+    },
+
+    "required_approvals": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0
+    },
+
+    "constraints": {
+      "type": "object",
+      "required": [
+        "max_calls_per_minute",
+        "allow_external_io",
+        "allow_network",
+        "allow_filesystem_write",
+        "allow_memory_write",
+        "require_citations_for_claims"
+      ],
+      "properties": {
+        "max_calls_per_minute": { "type": "integer", "minimum": 0 },
+
+        "allow_external_io": { "type": "boolean" },
+        "allow_network": { "type": "boolean" },
+
+        "allow_filesystem_write": { "type": "boolean" },
+        "allow_memory_write": { "type": "boolean" },
+
+        "require_citations_for_claims": { "type": "boolean" }
+      }
+    },
+
+    "notes": { "type": "string" },
+
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
