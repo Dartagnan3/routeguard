@@ -1,0 +1,10 @@
+{
+  "event_id": "decay-001",
+  "claim_id": "claim-001",
+  "previous_hash": "def456",
+  "new_hash": "expired",
+  "timestamp": "2026-02-02T10:00:00Z",
+  "reason": "Belief exceeded time-to-live without reinforcement.",
+  "actor": "decay_engine",
+  "ttl_hours": 24
+}
