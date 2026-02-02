@@ -1,0 +1,40 @@
+{
+  "type": "GateEvent",
+  "required": [
+    "gate_id",
+    "action_type",
+    "requested_action",
+    "tainted_context",
+    "approvals_required",
+    "approvals_received",
+    "decision",
+    "reason",
+    "timestamp"
+  ],
+  "properties": {
+    "gate_id": { "type": "string" },
+    "action_type": {
+      "type": "string",
+      "enum": ["tool_call", "memory_commit"]
+    },
+    "requested_action": { "type": "string" },
+    "tainted_context": { "type": "boolean" },
+    "approvals_required": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "approvals_received": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["allow", "deny"]
+    },
+    "reason": { "type": "string" },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
