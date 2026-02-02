@@ -3,7 +3,7 @@
 **RouteGuard** is a constraint layer for multi-agent systems.  
 It enforces **non-drifting behavior** using provenance, decay, falsification, and execution gates.
 
-> *Change is allowed. Drift is not. Measure your molting.*
+> *Change is allowed. Drift is not. All transformation must be measured.*
 
 ---
 
@@ -165,4 +165,4 @@ MIT or Apache-2.0 (recommended)
 
 ## One-line summary
 
-> RouteGuard is a map constraint for fast walkers.
+> RouteGuard is a constraint grammar for fast-moving agent systems.
