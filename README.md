@@ -157,6 +157,46 @@ If your system can act, it needs constraints.
 
 ---
 
+## Quick Start
+
+### 1. Create a policy
+```
+{
+  "policy_id": "strict-json",
+  "version": "0.1",
+  "mode": "STRICT",
+  "allow_codeblock": false,
+  "allow_substring_extraction": false,
+  "allow_repair": false
+}
+```
+Save as: policy.json
+
+  2. Run RouteGuard on a model output
+```
+python -m routeguard.cli \
+  --policy policy.json \
+  --file model_output.txt
+```
+You’ll get:
+```
+✅ ALLOW: Output passed RouteGuard policy.
+```
+or:
+```
+❌ DENY: Output violated RouteGuard policy.
+```
+  3. Use in Python
+```
+from routeguard import RouteGuardEngine
+
+engine = RouteGuardEngine("policy.json")
+
+result = engine.evaluate_output(model_output_text)
+
+print(result)
+```
+     
 ## License
 
 MIT or Apache-2.0 (recommended)
