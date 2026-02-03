@@ -119,7 +119,42 @@ RouteGuard works best as middleware:
 - before propagation to other agents  
 
 ---
+## Behavior Examples
 
+RouteGuard enforces policy decisions on model outputs and events.
+
+Run examples:
+Pass
+```bash
+python -m routeguard.cli --policy examples/policy.json --file examples/model_output_good.txt
+```
+
+Expected:
+
+```
+ALLOW: Output passed RouteGuard policy.
+```
+Deny
+```bash
+python -m routeguard.cli --policy examples/policy.json --file examples/model_output.txt
+```
+
+Expected:
+
+```
+DENY: Output violated RouteGuard policy.
+```
+Invariant Violation
+```bash
+python -m routeguard.cli --policy examples/policy.json --file examples/invariant_violation_event.json
+```
+
+Expected:
+
+```
+DENY: Invariant violation detected.
+```
+---
 ## Core axiom
 
 > Any change in belief form must be accompanied  
