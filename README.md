@@ -204,10 +204,16 @@ If your system can act, it needs constraints.
 
 ## Quick Start
 
-### 1. Install (editable mode)
+### 1. Install (local, editable)
+
+Clone the repo and install in editable mode:
+
 ```bash
+git clone https://github.com/Dartagnan3/routeguard.git
+cd routeguard
 pip install -e .
 ```
+
 
   2. Run RouteGuard on a known-good example
 ```
@@ -220,7 +226,7 @@ Expected:
 ✅ ALLOW: Output passed RouteGuard policy.
 ```
 
-  3. Run RouteGuard on a failing example
+  3. Run a failing example
 ```
 python -m routeguard.cli \
   --policy examples/policy.json \
