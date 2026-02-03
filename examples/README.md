@@ -28,3 +28,16 @@ Expected:
 ```
 DENY: Output violated RouteGuard policy.
 ```
+## Test tool permission deny
+
+```bash
+python -m routeguard.cli \
+  --policy policy.json \
+  --file tool_permission_send_external_email_deny.json
+```
+
+Expected:
+
+```
+DENY: Tool permission not granted.
+```
