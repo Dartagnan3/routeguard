@@ -204,41 +204,42 @@ If your system can act, it needs constraints.
 
 ## Quick Start
 
-### 1. Create a policy
+### 1. Install (editable mode)
+```bash
+pip install -e .
 ```
-{
-  "policy_id": "strict-json",
-  "version": "0.1",
-  "mode": "STRICT",
-  "allow_codeblock": false,
-  "allow_substring_extraction": false,
-  "allow_repair": false
-}
-```
-Save as: policy.json
 
-  2. Run RouteGuard on a model output
+  2. Run RouteGuard on a known-good example
 ```
 python -m routeguard.cli \
-  --policy policy.json \
-  --file model_output.txt
+  --policy examples/policy.json \
+  --file examples/model_output_good.txt
 ```
-You’ll get:
+Expected:
 ```
 ✅ ALLOW: Output passed RouteGuard policy.
 ```
-or:
+
+  3. Run RouteGuard on a failing example
 ```
-❌ DENY: Output violated RouteGuard policy.
+python -m routeguard.cli \
+  --policy examples/policy.json \
+  --file examples/model_output.txt
 ```
-  3. Use in Python
+Expected: 
+```
+DENY: Output violated RouteGuard policy.
+```
+  4. Use in Python
 ```
 from routeguard import RouteGuardEngine
 
-engine = RouteGuardEngine("policy.json")
+engine = RouteGuardEngine("examples/policy.json")
 
-result = engine.evaluate_output(model_output_text)
+with open("examples/model_output_good.txt") as f:
+    text = f.read()
 
+result = engine.evaluate_output(text)
 print(result)
 ```
      
