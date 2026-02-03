@@ -1,0 +1,7 @@
+{
+  "status": "ok",
+  "result": {
+    "message": "Operation completed successfully",
+    "count": 3
+  }
+}
