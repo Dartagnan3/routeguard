@@ -1,0 +1,2 @@
+Sure! Here is your JSON:
+{"answer": 42}
