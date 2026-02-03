@@ -205,7 +205,7 @@ If your system can act, it needs constraints.
 ## Quick Start
 
 ### 1. Install (local, editable)
-
+Requires Python 3.9+
 Clone the repo and install in editable mode:
 
 ```bash
