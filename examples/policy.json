@@ -1,0 +1,8 @@
+{
+  "policy_id": "strict-json",
+  "version": "0.1",
+  "mode": "STRICT",
+  "allow_codeblock": false,
+  "allow_substring_extraction": false,
+  "allow_repair": false
+}
