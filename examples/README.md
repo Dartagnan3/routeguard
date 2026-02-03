@@ -41,3 +41,29 @@ Expected:
 ```
 DENY: Tool permission not granted.
 ```
+## Test gate event allow
+
+```bash
+python -m routeguard.cli \
+  --policy policy.json \
+  --file gate_event_allow.json
+```
+
+Expected:
+
+```
+ALLOW: Gate event approved.
+```
+## Test gate event deny
+
+```bash
+python -m routeguard.cli \
+  --policy policy.json \
+  --file gate_event_deny.json
+```
+
+Expected:
+
+```
+DENY: Gate event rejected.
+```
