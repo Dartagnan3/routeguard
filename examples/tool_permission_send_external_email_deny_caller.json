@@ -1,0 +1,15 @@
+{
+  "policy_id": "tp-send-external-email-v1",
+  "version": "1.0",
+  "tool": "send_external_email",
+  "allowed": false,
+  "allowed_callers": ["planner", "executor"],
+  "required_approvals": ["anchor", "auditor"],
+  "approvals_received": ["anchor", "auditor"],
+  "constraints": {
+    "max_recipients": 1,
+    "allow_external_domains": false
+  },
+  "deny_reason": "caller_not_allowed",
+  "timestamp": "2026-02-02T19:06:00Z"
+}
