@@ -1,0 +1,17 @@
+{
+  "type": "StructuredOutputGate",
+  "required": ["policy_id", "version", "mode", "allow_codeblock", "allow_substring_extraction", "allow_repair"],
+  "properties": {
+    "policy_id": { "type": "string" },
+    "version": { "type": "string" },
+    "mode": { "type": "string", "enum": ["STRICT", "LENIENT"] },
+
+    "allow_codeblock": { "type": "boolean" },
+    "allow_substring_extraction": { "type": "boolean" },
+    "allow_repair": { "type": "boolean" },
+
+    "notes": { "type": "string" },
+    "timestamp": { "type": "string" }
+  },
+  "additionalProperties": false
+}
