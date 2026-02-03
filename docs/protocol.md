@@ -111,6 +111,18 @@ A standard gate order:
    - invariants hold OR
    - uncertainty budget explicitly paid
 7. TOOL_PERMISSION_GATE (v0.2)
+   This gate enforces explicit tool/action policy before any external action executes.
+   Rules:
+   - A ToolPermission policy MUST exist for the requested tool/action.
+   - If missing → deny (reason: "policy_missing")
+   - The caller MUST be in allowed_callers (if allowed_callers is non-empty).
+   - If not allowed → deny (reason: "caller_not_allowed")
+   - All required approvals MUST be present (set inclusion).
+   - If missing → deny (reason: "missing_approval")
+   - Constraints MUST be satisfied (if defined).
+   - If violated → deny (reason: "constraint_violation")
+   Output:
+   - On every evaluation, emit a ToolPermissionDecision record (allow/deny + reason).
 8. NO_FORBIDDEN_PRACTICES
 
 ## Invariant violations (auditable failures)
