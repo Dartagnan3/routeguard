@@ -123,7 +123,7 @@ RouteGuard works best as middleware:
 
 RouteGuard enforces policy decisions on model outputs and events.
 
-Run examples:
+Pass → Run examples
 Pass
 ```bash
 python -m routeguard.cli --policy examples/policy.json --file examples/model_output_good.txt
@@ -144,7 +144,7 @@ Expected:
 ```
 DENY: Output violated RouteGuard policy.
 ```
-Invariant Violation
+Invariant violation
 ```bash
 python -m routeguard.cli --policy examples/policy.json --file examples/invariant_violation_event.json
 ```
@@ -153,6 +153,16 @@ Expected:
 
 ```
 DENY: Invariant violation detected.
+```
+Tool Permission Denied
+```bash
+python -m routeguard.cli --policy examples/policy.json --file examples/tool_permission_send_external_email_deny.json
+```
+
+Expected:
+
+```
+DENY: Tool permission not granted.
 ```
 ---
 ## Core axiom
