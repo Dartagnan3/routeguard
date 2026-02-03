@@ -67,3 +67,16 @@ Expected:
 ```
 DENY: Gate event rejected.
 ```
+## Test invariant violation
+
+```bash
+python -m routeguard.cli \
+  --policy policy.json \
+  --file invariant_violation_event.json
+```
+
+Expected:
+
+```
+DENY: Invariant violation detected.
+```
