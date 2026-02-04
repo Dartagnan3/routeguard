@@ -30,37 +30,37 @@ def evaluate_structured_output(
     model_output: str,
     tool_name: Optional[str] = None,
 ) -> GateDecision:
-    """
-    Apply a StructuredOutputGatePolicy to a model output string.
-    Returns a GateDecision enum.
-    """
-
     text = model_output.strip()
 
-    # 1. Codeblock rule
+    # Tool permission enforcement
+    if tool_name:
+        if policy.forbidden_tools and tool_name in policy.forbidden_tools:
+            return GateDecision.DENY
+        if policy.allowed_tools and tool_name not in policy.allowed_tools:
+            return GateDecision.DENY
+
+    # Codeblock rule
     if not policy.allow_codeblock and _contains_codeblock(text):
         return GateDecision.DENY
 
-    # 2. STRICT mode: must be raw JSON only
+    # STRICT mode
     if policy.mode == GateMode.STRICT:
         if _looks_like_wrapped_json(text):
             return GateDecision.DENY
         if not _is_valid_json(text):
             return GateDecision.DENY
 
-    # 3. LENIENT mode: allow wrapper, but must contain extractable JSON
+    # LENIENT mode
     if policy.mode == GateMode.LENIENT:
         extracted = None
-
         try:
             extracted = json.loads(text)
         except Exception:
-            # Try substring extraction if allowed
             if policy.allow_substring_extraction:
                 start = text.find("{")
                 end = text.rfind("}")
                 if start != -1 and end != -1 and end > start:
-                    candidate = text[start : end + 1]
+                    candidate = text[start:end+1]
                     try:
                         extracted = json.loads(candidate)
                     except Exception:
@@ -68,14 +68,5 @@ def evaluate_structured_output(
 
         if extracted is None:
             return GateDecision.DENY
-
-    # 4. Tool permission logic (if tool_name provided)
-    if tool_name:
-        if policy.allowed_tools is not None:
-            if tool_name not in policy.allowed_tools:
-                return GateDecision.DENY
-        if policy.forbidden_tools is not None:
-            if tool_name in policy.forbidden_tools:
-                return GateDecision.DENY
 
     return GateDecision.ALLOW
