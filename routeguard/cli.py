@@ -40,15 +40,25 @@ def main():
 
     model_output = output_path.read_text(encoding="utf-8")
 
-    decision = engine.evaluate_output(
+    # NOTE: engine now returns GateResult, not GateDecision
+    result = engine.evaluate_output(
         model_output,
         tool_name=args.tool,
     )
 
+    decision = result.decision
+
     if decision == GateDecision.ALLOW:
         print("✅ ALLOW: Output passed RouteGuard policy.")
+
     elif decision == GateDecision.DENY:
-        print("❌ DENY: Output violated RouteGuard policy.")
+        msg = "❌ DENY: Output violated RouteGuard policy."
+        if result.violation and result.violation.reason:
+            msg += f"\nReason: {result.violation.reason}"
+        if result.violation and result.violation.detail:
+            msg += f"\nDetail: {result.violation.detail}"
+        print(msg)
+
     else:
         print(f"⚠️ RESULT: {decision}")
 
