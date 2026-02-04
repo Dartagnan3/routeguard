@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ClaimRecord",
+  "type": "object",
+  "required": ["spec_version", "claim", "agent_id", "timestamp"],
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "pattern": "^1\\.0$"
+    },
+    "claim": {
+      "type": "string"
+    },
+    "agent_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}
