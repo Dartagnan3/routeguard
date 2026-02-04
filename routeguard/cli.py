@@ -17,6 +17,11 @@ def main():
         required=True,
         help="Path to file containing model output to evaluate",
     )
+    parser.add_argument(
+        "--tool",
+        required=False,
+        help="Optional tool name to enforce tool permission rules",
+    )
 
     args = parser.parse_args()
 
@@ -35,7 +40,10 @@ def main():
 
     model_output = output_path.read_text(encoding="utf-8")
 
-    decision = engine.evaluate_output(model_output)
+    decision = engine.evaluate_output(
+        model_output,
+        tool_name=args.tool,
+    )
 
     if decision == GateDecision.ALLOW:
         print("✅ ALLOW: Output passed RouteGuard policy.")
