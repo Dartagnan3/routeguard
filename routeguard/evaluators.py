@@ -31,14 +31,54 @@ def _is_valid_json(text: str) -> bool:
         return False
 
 
+def _normalize_tool_name(tool_name: str) -> str:
+    # keep it simple + stable: trim whitespace
+    return tool_name.strip()
+
+
+def _check_tool_permissions(
+    policy: StructuredOutputGatePolicy,
+    tool_name: Optional[str],
+) -> Optional[GateDecision]:
+    """
+    Returns a GateDecision (DENY) if tool is not permitted, else None.
+    Priority:
+      1) forbidden_tools blocks always
+      2) allowed_tools (if present) is an allowlist
+    """
+    if not tool_name:
+        return None
+
+    t = _normalize_tool_name(tool_name)
+
+    # 1) Deny if explicitly forbidden
+    if policy.forbidden_tools is not None and t in policy.forbidden_tools:
+        return GateDecision.deny(reason="Tool permission not granted.")
+
+    # 2) If an allowlist exists, deny anything not on it
+    if policy.allowed_tools is not None and t not in policy.allowed_tools:
+        return GateDecision.deny(reason="Tool permission not granted.")
+
+    return None
+
+
 def evaluate_structured_output(
     policy: StructuredOutputGatePolicy,
     model_output: str,
+    tool_name: Optional[str] = None,
 ) -> GateDecision:
     """
     Apply a StructuredOutputGatePolicy to a model output string.
     Returns a GateDecision.
+
+    tool_name (optional):
+      If provided, enforces policy.allowed_tools / policy.forbidden_tools.
     """
+
+    # 0) Tool permission gate (if tool_name provided)
+    tool_gate = _check_tool_permissions(policy, tool_name)
+    if tool_gate is not None:
+        return tool_gate
 
     text = model_output.strip()
 
