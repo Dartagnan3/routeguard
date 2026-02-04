@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 
 from .models import StructuredOutputGatePolicy, GateMode, GateDecision
 
@@ -31,35 +31,20 @@ def _is_valid_json(text: str) -> bool:
         return False
 
 
-def _normalize_tool_name(tool_name: str) -> str:
-    # keep it simple + stable: trim whitespace
-    return tool_name.strip()
-
-
-def _check_tool_permissions(
-    policy: StructuredOutputGatePolicy,
-    tool_name: Optional[str],
-) -> Optional[GateDecision]:
+def _tool_is_allowed(policy: StructuredOutputGatePolicy, tool_name: str) -> bool:
     """
-    Returns a GateDecision (DENY) if tool is not permitted, else None.
-    Priority:
-      1) forbidden_tools blocks always
-      2) allowed_tools (if present) is an allowlist
+    Tool permission logic:
+      - if forbidden_tools contains tool_name => deny
+      - if allowed_tools is set (non-empty) and tool_name not in it => deny
+      - otherwise allow
     """
-    if not tool_name:
-        return None
-
-    t = _normalize_tool_name(tool_name)
-
-    # 1) Deny if explicitly forbidden
-    if policy.forbidden_tools is not None and t in policy.forbidden_tools:
-        return GateDecision.deny(reason="Tool permission not granted.")
-
-    # 2) If an allowlist exists, deny anything not on it
-    if policy.allowed_tools is not None and t not in policy.allowed_tools:
-        return GateDecision.deny(reason="Tool permission not granted.")
-
-    return None
+    if policy.forbidden_tools and tool_name in policy.forbidden_tools:
+        return False
+    if policy.allowed_tools is not None:
+        # allowed_tools provided: treat as an allowlist
+        if tool_name not in policy.allowed_tools:
+            return False
+    return True
 
 
 def evaluate_structured_output(
@@ -70,23 +55,18 @@ def evaluate_structured_output(
     """
     Apply a StructuredOutputGatePolicy to a model output string.
     Returns a GateDecision.
-
-    tool_name (optional):
-      If provided, enforces policy.allowed_tools / policy.forbidden_tools.
     """
-
-    # 0) Tool permission gate (if tool_name provided)
-    tool_gate = _check_tool_permissions(policy, tool_name)
-    if tool_gate is not None:
-        return tool_gate
 
     text = model_output.strip()
 
+    # 0. Tool permission gate (only if caller supplies a tool_name)
+    if tool_name is not None:
+        if not _tool_is_allowed(policy, tool_name):
+            return GateDecision.deny(reason="Tool permission not granted.")
+
     # 1. Codeblock rule
     if not policy.allow_codeblock and _contains_codeblock(text):
-        return GateDecision.deny(
-            reason="Code blocks are not allowed under this policy."
-        )
+        return GateDecision.deny(reason="Code blocks are not allowed under this policy.")
 
     # 2. STRICT mode: must be raw JSON only
     if policy.mode == GateMode.STRICT:
@@ -119,11 +99,7 @@ def evaluate_structured_output(
                         extracted = None
 
         if extracted is None:
-            return GateDecision.deny(
-                reason="LENIENT mode: could not extract valid JSON."
-            )
+            return GateDecision.deny(reason="LENIENT mode: could not extract valid JSON.")
 
     # 4. If we reached here, we passed
-    return GateDecision.allow(
-        notes="Structured output accepted under policy."
-    )
+    return GateDecision.allow(notes="Structured output accepted under policy.")
