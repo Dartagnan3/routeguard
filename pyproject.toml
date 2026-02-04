@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "routeguard"
+version = "0.1.0"
+description = "Constraint layer for multi-agent systems (route integrity, provenance, decay, falsification, execution gates)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+[tool.setuptools]
+packages = ["routeguard"]
