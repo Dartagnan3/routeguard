@@ -3,6 +3,7 @@ from pathlib import Path
 
 from .engine import RouteGuardEngine
 from .models import GateDecision
+from .validators import validate_against_schema
 
 
 def main():
@@ -24,11 +25,27 @@ def main():
         print(f"Output file not found: {output_path}")
         return
 
-    engine = RouteGuardEngine(str(policy_path))
     model_output = output_path.read_text(encoding="utf-8")
 
-    # Engine returns GateDecision enum directly
-    decision = engine.evaluate_output(model_output, tool_name=args.tool)
+    # 0) Schema validation (fail fast, before any policy logic)
+    # NOTE: adjust this if you want a different schema entrypoint
+    schema_path = Path("spec/claim_record.schema.json")
+    if schema_path.exists():
+        ok, err = validate_against_schema(model_output, schema_path)
+        if not ok:
+            print(f"❌ SCHEMA FAIL: {err}")
+            return
+    else:
+        # If schema isn't present locally, don't block execution.
+        # (Optional: you can choose to hard-fail instead.)
+        print(f"⚠️ Schema not found (skipping): {schema_path}")
+
+    # 1) Policy evaluation
+    engine = RouteGuardEngine(str(policy_path))
+
+    # If your engine returns GateResult (newer), handle that:
+    result = engine.evaluate_output(model_output, tool_name=args.tool)
+    decision = result.decision if hasattr(result, "decision") else result  # backward compat
 
     if decision == GateDecision.ALLOW:
         print("✅ ALLOW: Output passed RouteGuard policy.")
