@@ -1,11 +1,22 @@
 {
-  "gate_id": "gate-001",
-  "action_type": "tool_call",
-  "requested_action": "send_external_email",
-  "tainted_context": true,
-  "approvals_required": ["anchor", "auditor"],
-  "approvals_received": ["anchor"],
-  "decision": "deny",
-  "reason": "Execution denied: context marked as tainted and required Auditor approval was not obtained.",
-  "timestamp": "2026-02-02T10:30:00Z"
+  "spec_version": "0.2.0",
+  "event_id": "evt_gate_001",
+  "ts": "2026-02-02T10:30:00Z",
+  "principal": { "principal_id": "system" },
+  "action": "gate.evaluate",
+  "subject": {
+    "subject_id": "tool:send_external_email",
+    "subject_type": "tool"
+  },
+  "context": {
+    "gate_id": "gate-001",
+    "action_type": "tool_call",
+    "requested_action": "send_external_email",
+    "tainted_context": true,
+    "approvals_required": ["anchor", "auditor"],
+    "approvals_received": ["anchor"],
+    "decision": "deny",
+    "reason": "Execution denied: context marked as tainted and required Auditor approval was not obtained.",
+    "timestamp": "2026-02-02T10:30:00Z"
+  }
 }
