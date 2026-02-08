@@ -1,11 +1,22 @@
 {
-  "gate_id": "gate-002",
-  "action_type": "tool_call",
-  "requested_action": "send_external_email",
-  "tainted_context": false,
-  "approvals_required": ["anchor", "auditor"],
-  "approvals_received": ["anchor", "auditor"],
-  "decision": "allow",
-  "reason": "Context verified as untainted and all required approvals obtained.",
-  "timestamp": "2026-02-02T10:45:00Z"
+  "spec_version": "0.2.0",
+  "event_id": "evt_gate_002",
+  "ts": "2026-02-02T10:45:00Z",
+  "principal": { "principal_id": "system" },
+  "action": "gate.evaluate",
+  "subject": {
+    "subject_id": "tool:send_external_email",
+    "subject_type": "tool"
+  },
+  "context": {
+    "gate_id": "gate-002",
+    "action_type": "tool_call",
+    "requested_action": "send_external_email",
+    "tainted_context": false,
+    "approvals_required": ["anchor", "auditor"],
+    "approvals_received": ["anchor", "auditor"],
+    "decision": "allow",
+    "reason": "Context verified as untainted and all required approvals obtained.",
+    "timestamp": "2026-02-02T10:45:00Z"
+  }
 }
