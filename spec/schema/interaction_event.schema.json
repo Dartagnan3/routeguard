@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://routeguard.dev/schema/interaction_event.schema.json",
+  "title": "RouteGuard Interaction Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["spec_version", "event_id", "ts", "principal", "action", "context"],
+  "properties": {
+    "spec_version": { "type": "string", "minLength": 1 },
+    "event_id": { "type": "string", "minLength": 1 },
+    "ts": { "type": "string", "format": "date-time" },
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["principal_id"],
+      "properties": {
+        "principal_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "action": {
+      "type": "string",
+      "enum": ["memory.write", "retrieval.query", "resource.add", "session.commit"]
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject_id", "subject_type"],
+      "properties": {
+        "subject_id": { "type": "string", "minLength": 1 },
+        "subject_type": { "type": "string", "minLength": 1 }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}
