@@ -1,9 +1,20 @@
 {
-  "event_id": "event-001",
-  "claim_id": "claim-001",
-  "previous_hash": "abc123",
-  "new_hash": "def456",
-  "timestamp": "2026-02-02T09:10:00Z",
-  "reason": "New geospatial data confirmed location.",
-  "actor": "human_reviewer"
+  "spec_version": "0.2.0",
+  "event_id": "evt_update_001",
+  "ts": "2026-02-08T18:50:00Z",
+  "principal": { "principal_id": "human_reviewer" },
+
+  "action": "state.update",
+
+  "subject": { "subject_id": "claim:claim-001", "subject_type": "claim" },
+
+  "context": {
+    "event_id": "event-001",
+    "claim_id": "claim-001",
+    "previous_hash": "abc123",
+    "new_hash": "def456",
+    "timestamp": "2026-02-02T09:10:00Z",
+    "reason": "New geospatial data confirmed location.",
+    "actor": "human_reviewer"
+  }
 }
