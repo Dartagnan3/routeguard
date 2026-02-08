@@ -1,28 +1,32 @@
 {
-  "policy_id": "tool-policy-001",
-  "version": "1.0",
+  "spec_version": "0.2.0",
+  "event_id": "evt_tool_permission_001",
+  "ts": "2026-02-08T18:55:00Z",
+  "principal": { "principal_id": "system" },
 
-  "tool": "send_external_email",
+  "action": "policy.tool_permission",
 
-  "allowed": true,
-
-  "allowed_callers": ["anchor"],
-
-  "required_approvals": ["anchor", "auditor"],
-
-  "constraints": {
-    "max_calls_per_minute": 2,
-
-    "allow_external_io": true,
-    "allow_network": true,
-
-    "allow_filesystem_write": false,
-    "allow_memory_write": false,
-
-    "require_citations_for_claims": true
+  "subject": {
+    "subject_id": "tool:send_external_email",
+    "subject_type": "tool"
   },
 
-  "notes": "External email allowed only with Anchor and Auditor approval.",
-
-  "timestamp": "2026-02-02T10:56:00Z"
+  "context": {
+    "policy_id": "tool-policy-001",
+    "version": "1.0",
+    "tool": "send_external_email",
+    "allowed": true,
+    "allowed_callers": ["anchor"],
+    "required_approvals": ["anchor", "auditor"],
+    "constraints": {
+      "max_calls_per_minute": 2,
+      "allow_external_io": true,
+      "allow_network": true,
+      "allow_filesystem_write": false,
+      "allow_memory_write": false,
+      "require_citations_for_claims": true
+    },
+    "notes": "External email allowed only with Anchor and Auditor approval.",
+    "timestamp": "2026-02-02T10:56:00Z"
+  }
 }
