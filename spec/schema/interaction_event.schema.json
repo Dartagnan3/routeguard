@@ -17,10 +17,11 @@
         "principal_id": { "type": "string", "minLength": 1 }
       }
     },
-    "action": {
-      "type": "string",
-      "enum": ["memory.write", "retrieval.query", "resource.add", "session.commit"]
-    },
+   "action": {
+  "type": "string",
+  "minLength": 1,
+  "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+},
     "subject": {
       "type": "object",
       "additionalProperties": false,
