@@ -1,24 +1,36 @@
 {
-  "event_id": "inv-001",
-  "event_type": "InvariantViolation",
+  "spec_version": "0.2.0",
+  "event_id": "evt_invariant_violation_001",
+  "ts": "2026-02-02T11:00:00Z",
 
-  "invariant": "no_external_io_without_approval",
+  "principal": { "principal_id": "system" },
 
-  "observed_action": "send_external_email",
+  "action": "invariant.violation",
 
-  "tool": "send_external_email",
+  "subject": {
+    "subject_id": "tool:send_external_email",
+    "subject_type": "tool"
+  },
 
-  "gate_decision": "deny",
+  "context": {
+    "event_id": "inv-001",
+    "event_type": "InvariantViolation",
 
-  "violations": [
-    "tool_permission_missing",
-    "auditor_approval_missing"
-  ],
+    "invariant": "no_external_io_without_approval",
+    "observed_action": "send_external_email",
+    "tool": "send_external_email",
+    "gate_decision": "deny",
 
-  "repair_plan": [
-    "request auditor approval",
-    "re-run gate_event"
-  ],
+    "violations": [
+      "tool_permission_missing",
+      "auditor_approval_missing"
+    ],
 
-  "timestamp": "2026-02-02T11:00:00Z"
+    "repair_plan": [
+      "request auditor approval",
+      "re-run gate_event"
+    ],
+
+    "timestamp": "2026-02-02T11:00:00Z"
+  }
 }
