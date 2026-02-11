@@ -1,0 +1,53 @@
+{
+  "spec_version": "0.2.0",
+  "event_id": "evt_gate_schema_001",
+  "ts": "2026-02-08T18:46:00Z",
+  "principal": { "principal_id": "routeguard" },
+
+  "action": "schema.legacy",
+
+  "subject": { "subject_id": "spec:gate_event", "subject_type": "schema" },
+
+  "context": {
+    "legacy_schema": {
+      "type": "GateEvent",
+      "required": [
+        "gate_id",
+        "action_type",
+        "requested_action",
+        "tainted_context",
+        "approvals_required",
+        "approvals_received",
+        "decision",
+        "reason",
+        "timestamp"
+      ],
+      "properties": {
+        "gate_id": { "type": "string" },
+        "action_type": {
+          "type": "string",
+          "enum": ["tool_call", "memory_commit"]
+        },
+        "requested_action": { "type": "string" },
+        "tainted_context": { "type": "boolean" },
+        "approvals_required": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "approvals_received": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "decision": {
+          "type": "string",
+          "enum": ["allow", "deny"]
+        },
+        "reason": { "type": "string" },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

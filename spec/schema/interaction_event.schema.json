@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://routeguard.dev/schema/interaction_event.schema.json",
+  "title": "RouteGuard Interaction Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["spec_version", "event_id", "ts", "principal", "action", "context"],
+  "properties": {
+    "spec_version": { "type": "string", "minLength": 1 },
+
+    "event_id": { "type": "string", "minLength": 1 },
+
+    "ts": { "type": "string", "format": "date-time" },
+
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["principal_id"],
+      "properties": {
+        "principal_id": { "type": "string", "minLength": 1 },
+
+        "principal_type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional. Principal category. Policy may use this for admissibility (e.g., agent, human, service).",
+          "examples": ["agent", "human", "service", "system"]
+        }
+      }
+    },
+
+    "action": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$",
+      "description": "Namespaced action identifier (e.g., tool.fs.write, system.recover.cooldown)."
+    },
+
+    "subject": {
+      "type": "object",
+      "description": "Optional at schema level. Policy may require subject for agency-bearing actions (e.g., tool.*, data.*, exec.*).",
+      "additionalProperties": false,
+      "required": ["subject_id", "subject_type"],
+      "properties": {
+        "subject_id": { "type": "string", "minLength": 1 },
+        "subject_type": { "type": "string", "minLength": 1 }
+      }
+    },
+
+    "attestations": {
+      "type": "array",
+      "description": "Optional. Evidence/consent/provenance claims supporting admissibility. RouteGuard evaluates presence/shape/expiry; solvers may interpret deeper semantics privately.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["attestation_type", "issuer", "ts"],
+        "properties": {
+          "attestation_type": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Namespaced attestation identifier.",
+            "examples": ["consent.grant", "provenance.hash", "capability.token", "policy.override"]
+          },
+          "issuer": { "type": "string", "minLength": 1 },
+          "ts": { "type": "string", "format": "date-time" },
+          "ttl_s": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Optional. Time-to-live in seconds from ts."
+          },
+          "scope": {
+            "type": "object",
+            "description": "Optional. Declares what this attestation covers (event/action/subject).",
+            "additionalProperties": true
+          },
+          "provenance_ref": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Optional. Reference or hash to external evidence; do not embed sensitive evidence directly."
+          }
+        }
+      }
+    },
+
+    "context": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Extensible bag for environment/contextual fields. May include non-sensitive runtime metadata."
+    },
+
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional. Transport/provenance metadata (e.g., trace_id, parent_event_id) for correlation and auditing."
+    }
+  }
+}

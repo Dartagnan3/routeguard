@@ -1,0 +1,27 @@
+{
+  "spec_version": "0.2.0",
+  "event_id": "evt_decay_001",
+  "ts": "2026-02-08T18:41:02Z",
+
+  "principal": {
+    "principal_id": "system"
+  },
+
+  "action": "state.decay",
+
+  "subject": {
+    "subject_id": "claim:123",
+    "subject_type": "claim"
+  },
+
+  "context": {
+    "claim_id": "123",
+    "previous_hash": "abc",
+    "new_hash": "def",
+    "reason": "ttl_expired",
+    "ttl_hours": 24,
+
+    "commit_kind": "auto",
+    "decay_scope": "claim"
+  }
+}

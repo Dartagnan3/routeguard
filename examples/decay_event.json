@@ -1,10 +1,24 @@
 {
-  "event_id": "decay-001",
-  "claim_id": "claim-001",
-  "previous_hash": "def456",
-  "new_hash": "expired",
-  "timestamp": "2026-02-02T10:00:00Z",
-  "reason": "Belief exceeded time-to-live without reinforcement.",
-  "actor": "decay_engine",
-  "ttl_hours": 24
+  "spec_version": "0.2.0",
+  "event_id": "evt_decay_001",
+  "ts": "2026-02-08T20:33:00Z",
+  "principal": { "principal_id": "decay_engine" },
+
+  "action": "state.decay",
+
+  "subject": {
+    "subject_id": "claim:claim-001",
+    "subject_type": "claim"
+  },
+
+  "context": {
+    "event_id": "decay-001",
+    "claim_id": "claim-001",
+    "previous_hash": "def456",
+    "new_hash": "expired",
+    "timestamp": "2026-02-02T10:00:00Z",
+    "reason": "Belief exceeded time-to-live without reinforcement.",
+    "actor": "decay_engine",
+    "ttl_hours": 24
+  }
 }

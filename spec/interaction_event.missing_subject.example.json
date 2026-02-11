@@ -1,0 +1,8 @@
+{
+  "spec_version": "0.3.0",
+  "event_id": "evt_missing_subject_001",
+  "ts": "2026-02-09T16:00:00Z",
+  "principal": { "principal_id": "agent:a1", "principal_type": "agent" },
+  "action": "tool.fs.write",
+  "context": { "path": "/tmp/x.txt", "bytes": 12 }
+}

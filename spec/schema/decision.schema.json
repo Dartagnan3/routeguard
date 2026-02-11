@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://routeguard.dev/schema/decision.schema.json",
+  "title": "RouteGuard Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "reason_code"],
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["ALLOW", "DENY", "ALLOW_WITH_CONSTRAINTS", "COOLDOWN", "QUARANTINE"]
+    },
+    "reason_code": { "type": "string", "minLength": 1 },
+    "report": { "type": ["object", "null"], "additionalProperties": true },
+    "constraints": {
+      "type": ["array", "null"],
+      "items": { "type": "object", "additionalProperties": true }
+    }
+  }
+}
