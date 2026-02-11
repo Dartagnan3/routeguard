@@ -23,7 +23,7 @@ def run_bowditch_golden(spec_path: str) -> Tuple[int, Dict[str, Any]]:
     results = []
 
     for t in tests:
-        test_id = t.get("test_id", "unknown")
+        test_id = t.get("test_id") or t.get("case_id") or "unknown"
         given = t.get("given", {})
         expect = t.get("expect", {})
 
