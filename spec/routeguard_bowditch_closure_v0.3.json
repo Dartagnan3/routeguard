@@ -27,30 +27,44 @@
   },
   "golden_tests": [
     {
-      "case_id": "allow_within_tolerance_simple_loop",
       "given": {
         "redundancy": 9,
         "anchors": {
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 10.0, "bearing_rad": 0.0 },
-          { "segment_id": "s2", "length": 10.0, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 10.0,
+            "bearing_rad": 0.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 10.0,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 0.1, "dep": 0.1, "norm": 0.2 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.1,
+              "dep": 0.1,
+              "norm": 0.2
+            }
           }
         ]
       },
       "expect": {
         "decision": "ALLOW"
-      }
+      },
+      "test_id": "allow_within_tolerance_simple_loop"
     },
     {
-      "case_id": "deny_require_anchor_on_anchor_conflict",
       "given": {
         "redundancy": 9,
         "anchors": {
@@ -62,100 +76,165 @@
       },
       "expect": {
         "decision": "DENY_REQUIRE_ANCHOR"
-      }
+      },
+      "test_id": "deny_require_anchor_on_anchor_conflict"
     },
     {
-      "case_id": "frog_requires_redundancy",
       "given": {
         "redundancy": 0,
         "anchors": {
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 10.0, "bearing_rad": 0.0, "is_frog": true },
-          { "segment_id": "s2", "length": 9.9, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 10.0,
+            "bearing_rad": 0.0,
+            "is_frog": true
+          },
+          {
+            "segment_id": "s2",
+            "length": 9.9,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 0.2, "dep": 0.2, "norm": 0.3 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.2,
+              "dep": 0.2,
+              "norm": 0.3
+            }
           }
         ]
       },
       "expect": {
         "decision": "DENY_REQUIRE_ANCHOR"
-      }
+      },
+      "test_id": "frog_requires_redundancy"
     },
     {
-      "case_id": "allow_with_corrections_small_misclosure",
       "given": {
         "redundancy": 9,
         "anchors": {
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 100.0, "bearing_rad": 0.0, "trust_weight": 1.0, "risk_weight": 1.0 },
-          { "segment_id": "s2", "length": 99.0, "bearing_rad": 3.141592653589793, "trust_weight": 1.0, "risk_weight": 1.0 }
+          {
+            "segment_id": "s1",
+            "length": 100.0,
+            "bearing_rad": 0.0,
+            "trust_weight": 1.0,
+            "risk_weight": 1.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 99.0,
+            "bearing_rad": 3.141592653589793,
+            "trust_weight": 1.0,
+            "risk_weight": 1.0
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 5.0, "dep": 5.0, "norm": 5.0 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.5,
+              "dep": 0.5,
+              "norm": 0.6
+            }
           }
         ]
       },
       "expect": {
         "decision": "ALLOW_WITH_CORRECTIONS"
-      }
+      },
+      "test_id": "allow_with_corrections_small_misclosure"
     },
     {
-      "case_id": "deny_require_recovery_when_misclosure_too_large",
       "given": {
         "redundancy": 9,
         "anchors": {
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 100.0, "bearing_rad": 0.0 },
-          { "segment_id": "s2", "length": 10.0, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 100.0,
+            "bearing_rad": 0.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 10.0,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 1.0, "dep": 1.0, "norm": 1.0 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 1.0,
+              "dep": 1.0,
+              "norm": 1.0
+            }
           }
         ]
       },
       "expect": {
         "decision": "DENY_REQUIRE_RECOVERY"
-      }
+      },
+      "test_id": "deny_require_recovery_when_misclosure_too_large"
     },
     {
-      "case_id": "deny_require_recovery_when_corrections_exceed_fraction",
       "given": {
         "redundancy": 9,
         "anchors": {
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 1.0, "bearing_rad": 0.0 },
-          { "segment_id": "s2", "length": 0.90, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 1.0,
+            "bearing_rad": 0.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 0.9,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 1.0, "dep": 1.0, "norm": 1.0 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.05,
+              "dep": 0.05,
+              "norm": 0.06
+            }
           }
         ]
       },
       "expect": {
         "decision": "DENY_REQUIRE_RECOVERY"
-      }
+      },
+      "test_id": "deny_require_recovery_when_corrections_exceed_fraction"
     }
   ]
 }
-EOF
