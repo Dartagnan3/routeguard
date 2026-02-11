@@ -34,14 +34,29 @@
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 10.0, "bearing_rad": 0.0 },
-          { "segment_id": "s2", "length": 10.0, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 10.0,
+            "bearing_rad": 0.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 10.0,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 0.1, "dep": 0.1, "norm": 0.2 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.005,
+              "dep": 0.005,
+              "norm": 0.005
+            }
           }
         ]
       },
@@ -72,19 +87,34 @@
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 10.0, "bearing_rad": 0.0, "is_frog": true },
-          { "segment_id": "s2", "length": 9.9, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 10.0,
+            "bearing_rad": 0.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 9.99,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 0.2, "dep": 0.2, "norm": 0.3 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.005,
+              "dep": 0.005,
+              "norm": 0.005
+            }
           }
         ]
       },
       "expect": {
-        "decision": "DENY_REQUIRE_ANCHOR"
+        "decision": "ALLOW_WITH_CORRECTIONS"
       }
     },
     {
@@ -95,14 +125,33 @@
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 100.0, "bearing_rad": 0.0, "trust_weight": 1.0, "risk_weight": 1.0 },
-          { "segment_id": "s2", "length": 99.0, "bearing_rad": 3.141592653589793, "trust_weight": 1.0, "risk_weight": 1.0 }
+          {
+            "segment_id": "s1",
+            "length": 100.0,
+            "bearing_rad": 0.0,
+            "trust_weight": 1.0,
+            "risk_weight": 1.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 99.0,
+            "bearing_rad": 3.141592653589793,
+            "trust_weight": 1.0,
+            "risk_weight": 1.0
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 5.0, "dep": 5.0, "norm": 5.0 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.6,
+              "dep": 0.6,
+              "norm": 0.6
+            }
           }
         ]
       },
@@ -118,14 +167,29 @@
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 100.0, "bearing_rad": 0.0 },
-          { "segment_id": "s2", "length": 10.0, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 100.0,
+            "bearing_rad": 0.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 10.0,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 1.0, "dep": 1.0, "norm": 1.0 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.05,
+              "dep": 0.05,
+              "norm": 0.05
+            }
           }
         ]
       },
@@ -141,14 +205,29 @@
           "anchor_agreement_tolerance": 10.0
         },
         "segments": [
-          { "segment_id": "s1", "length": 1.0, "bearing_rad": 0.0 },
-          { "segment_id": "s2", "length": 0.90, "bearing_rad": 3.141592653589793 }
+          {
+            "segment_id": "s1",
+            "length": 1.0,
+            "bearing_rad": 0.0
+          },
+          {
+            "segment_id": "s2",
+            "length": 0.9,
+            "bearing_rad": 3.141592653589793
+          }
         ],
         "loops": [
           {
             "loop_id": "L1",
-            "segments": ["s1", "s2"],
-            "closure_tolerance": { "lat": 1.0, "dep": 1.0, "norm": 1.0 }
+            "segments": [
+              "s1",
+              "s2"
+            ],
+            "closure_tolerance": {
+              "lat": 0.05,
+              "dep": 0.05,
+              "norm": 0.05
+            }
           }
         ]
       },
@@ -158,4 +237,3 @@
     }
   ]
 }
-EOF

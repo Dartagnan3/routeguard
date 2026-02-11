@@ -52,7 +52,7 @@ class InvariantViolation:
 @dataclass
 class GateViolation:
     """
-    Backwards-compatible violation type expected by engine.py.
+    Violation type expected by engine.py.
     """
     reason: str
     detail: Optional[str] = None

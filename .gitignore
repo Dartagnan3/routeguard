@@ -1,0 +1,16 @@
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.venv/
+.env
+
+# private doctrine / IP
+private_core/
+
+# routeguard private doctrine / IP
+routeguard/private_core/
