@@ -11,3 +11,6 @@ build/
 
 # private doctrine / IP
 private_core/
+
+# routeguard private doctrine / IP
+routeguard/private_core/
