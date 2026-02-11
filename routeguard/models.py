@@ -24,7 +24,7 @@ class StructuredOutputGatePolicy:
     allow_substring_extraction: bool
     allow_repair: bool
 
-    # NEW: tool permission controls
+    # Tool permission controls
     allowed_tools: Optional[List[str]] = None
     forbidden_tools: Optional[List[str]] = None
 
@@ -42,6 +42,18 @@ class GateEvent:
 
 @dataclass
 class InvariantViolation:
+    """
+    Conceptual invariant violation (legacy/internal name).
+    """
+    reason: str
+    detail: Optional[str] = None
+
+
+@dataclass
+class GateViolation:
+    """
+    Backwards-compatible violation type expected by engine.py.
+    """
     reason: str
     detail: Optional[str] = None
 
@@ -49,5 +61,5 @@ class InvariantViolation:
 @dataclass
 class GateResult:
     decision: GateDecision
-    violation: Optional[InvariantViolation] = None
+    violation: Optional[GateViolation] = None
     repaired_output: Optional[Any] = None
